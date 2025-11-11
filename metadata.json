@@ -1,0 +1,5 @@
+{
+  "name": "KEPY - Simple Sales Tracking",
+  "description": "A modern, responsive web application for KEPY, an MVP sales-tracking tool. It allows sellers to easily log sales and view their performance, while managers can see a consolidated dashboard.",
+  "requestFramePermissions": []
+}

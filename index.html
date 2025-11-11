@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KEPY - Suivi des ventes simple et instantané</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+    
+    <!-- Meta Tags for SEO -->
+    <meta name="description" content="Saisissez, consolidez et visualisez vos ventes en temps réel avec KEPY. L'outil simple pour le suivi des ventes de vos équipes.">
+    <meta property="og:title" content="KEPY - Suivi des ventes simple et instantané" />
+    <meta property="og:description" content="Saisissez, consolidez et visualisez vos ventes en temps réel avec KEPY." />
+    <meta property="og:type" content="website" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: '#22C55E', // green
+              dark: '#111827',
+              light: '#F3F4F6',
+              accent: '#0EA5E9',
+              'background-light': '#FFFFFF',
+              'background-dark': '#0A0A0A',
+              'text-light': '#0A0A0A',
+              'text-dark': '#F4F4F5',
+              'border-light': '#E2E8F0',
+              'border-dark': '#334155',
+              'card-light': '#FFFFFF',
+              'card-dark': '#1E293B',
+              'slate-subtle': '#64748b',
+            },
+            fontFamily: {
+              display: ['Poppins', 'sans-serif'],
+              body: ['Inter', 'sans-serif'],
+            },
+            borderRadius: {
+              'DEFAULT': '0.5rem',
+              'lg': '0.75rem',
+              'xl': '1rem',
+              'full': '9999px',
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      /* Simple smooth scroll */
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: 'Inter', 'sans-serif';
+      }
+       /* For FAQ arrow rotation */
+      details > summary {
+        list-style: none;
+      }
+      details > summary::-webkit-details-marker {
+        display: none;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-background-light text-text-light dark:bg-background-dark dark:text-text-dark">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
