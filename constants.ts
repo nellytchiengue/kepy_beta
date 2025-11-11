@@ -1,4 +1,3 @@
-
 // TODO: Replace these placeholder values with your actual URLs and IDs.
 
 // 1. Google Form for Sales Entry
@@ -24,7 +23,17 @@ export const LOOKER_VENDOR_BASE_URL = 'https://lookerstudio.google.com/reporting
 
 // 3. Demo Request Form
 // Instructions: Create a Google Form for demo requests and get its public URL.
-export const DEMO_CONTACT_FORM_URL = 'https://forms.gle/your_demo_form_id';
+export const DEMO_CONTACT_FORM_URL = 'https://forms.gle/r4N9DJeLQMUyumU4A';
 
 // 4. Contact Email
 export const CONTACT_EMAIL = 'contact@kepy.com';
+
+// 5. Manager App URL
+// This should point to the manager-specific HTML page.
+export const MANAGER_APP_URL = './manager.html'; 
+
+// 6. Consolidated Google Sheet URL
+// The direct link to the Google Sheet for managers.
+// We use /preview instead of /edit to provide a cleaner, view-only link
+// that is less likely to be blocked by browser security policies.
+export const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1QpW10jc3LJQ9N2_wF8vLlOKIT8P9-LGKj67SK0dM4Hc/preview#gid=878227682';

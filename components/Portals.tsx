@@ -1,7 +1,6 @@
-
 import React from 'react';
 import VendorWidget from './VendorWidget';
-import { LOOKER_CONSOLIDATED_URL } from '../constants';
+import { LOOKER_CONSOLIDATED_URL, MANAGER_APP_URL } from '../constants';
 
 const Portals: React.FC = () => {
     return (
@@ -15,14 +14,22 @@ const Portals: React.FC = () => {
                         </div>
                         <h3 className="text-2xl font-bold font-display text-text-light dark:text-text-dark mb-2">Portail Manager</h3>
                         <p className="text-slate-600 dark:text-slate-400 mb-6">Accédez à la vue consolidée de toutes les ventes de votre équipe.</p>
-                        <a
-                            href={LOOKER_CONSOLIDATED_URL}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex h-12 w-full max-w-xs items-center justify-center rounded-xl bg-accent px-8 text-base font-medium text-white shadow-sm transition-colors hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-                        >
-                            Ouvrir le tableau de bord
-                        </a>
+                        <div className="flex w-full max-w-xs flex-col items-center">
+                            <a
+                                href={LOOKER_CONSOLIDATED_URL}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-accent px-8 text-base font-medium text-white shadow-sm transition-colors hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                            >
+                                Ouvrir le tableau de bord
+                            </a>
+                            <a
+                                href={MANAGER_APP_URL}
+                                className="mt-4 inline-flex h-12 w-full items-center justify-center rounded-xl border border-accent bg-transparent px-8 text-base font-medium text-accent shadow-sm transition-colors hover:bg-accent/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+                            >
+                                Accéder à l'espace Manager
+                            </a>
+                        </div>
                     </div>
 
                     {/* Seller Portal */}
