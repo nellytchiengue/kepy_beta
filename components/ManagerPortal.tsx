@@ -30,7 +30,7 @@ const ManagerPortal: React.FC = () => {
             {/* Sidebar / Bottom Nav */}
             <nav className="fixed bottom-0 left-0 right-0 z-30 flex justify-around border-t border-border-light bg-card-light/90 py-2 backdrop-blur-sm dark:border-border-dark dark:bg-card-dark/90 lg:static lg:h-screen lg:w-64 lg:flex-col lg:justify-start lg:border-r lg:border-t-0 lg:p-6 lg:backdrop-blur-none">
                 <div className="hidden lg:flex lg:items-center lg:gap-3 lg:pb-8">
-                    <a href="/index.html" className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
+                    <a href="./index.html" className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
                        <svg className="h-6 w-6 text-white" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                          <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
                          <path d="M2 17l10 5 10-5"></path>
