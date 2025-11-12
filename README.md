@@ -2,7 +2,7 @@
 
 ## À propos du projet
 
-KEPY est une application web MVP (Minimum Viable Product) pour le suivi des ventes. Elle est conçue pour être simple, moderne et responsive. Elle permet aux vendeurs de saisir facilement leurs ventes et de consulter leurs performances, tandis que les managers bénéficient d'une vue d'ensemble consolidée.
+KEPY est une application web - version MVP (Minimum Viable Product) - pour le suivi des ventes. Elle est conçue pour être simple, moderne et responsive. Elle permet aux vendeurs de saisir facilement leurs ventes et de consulter leurs performances, tandis que les managers bénéficient d'une vue d'ensemble consolidée.
 
 Ce projet est construit sans aucun outil de build (pas de Webpack, Vite, etc.), en utilisant du HTML, Tailwind CSS (via CDN), et React (via CDN) pour une simplicité maximale de déploiement.
 
