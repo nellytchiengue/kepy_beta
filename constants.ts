@@ -29,8 +29,8 @@ export const DEMO_CONTACT_FORM_URL = 'https://forms.gle/r4N9DJeLQMUyumU4A';
 export const CONTACT_EMAIL = 'contact@kepy.com';
 
 // 5. Manager App URL
-// This should point to the manager-specific HTML page.
-export const MANAGER_APP_URL = './manager.html'; 
+// This now points to the manager route in the SPA.
+export const MANAGER_APP_URL = '#manager'; 
 
 // 6. Consolidated Google Sheet URL
 // The direct link to the Google Sheet for managers.

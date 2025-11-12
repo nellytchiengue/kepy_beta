@@ -50,8 +50,8 @@ const Header: React.FC = () => {
 
   const scrollToTop = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
+    window.location.hash = '';
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    history.pushState(null, null, ' '); 
   };
   
   const handleSignOut = () => {
@@ -99,7 +99,7 @@ const Header: React.FC = () => {
             </div>
           ) : (
             <>
-              <a className="font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary transition-colors" href="./login.html">Connexion</a>
+              <a className="font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary transition-colors" href="#login">Connexion</a>
               <a className="inline-flex h-10 items-center justify-center rounded-lg bg-primary px-5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary/90" href="#">Essai gratuit</a>
             </>
           )}
@@ -129,7 +129,7 @@ const Header: React.FC = () => {
                  </div>
             ) : (
                 <>
-                    <a className="font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="./login.html">Connexion</a>
+                    <a className="font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-primary" href="#login">Connexion</a>
                     <a className="inline-flex h-10 items-center justify-center rounded-lg bg-primary px-5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-primary/90" href="#">Essai gratuit</a>
                 </>
             )}

@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { auth } from '../firebaseConfig';
 import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -12,7 +13,7 @@ const Login: React.FC = () => {
         const provider = new GoogleAuthProvider();
         try {
             await signInWithPopup(auth, provider);
-            window.location.href = './index.html'; // Redirect on success
+            window.location.href = '#'; // Redirect on success to home page
         } catch (error) {
             console.error("Authentication error:", error);
             setError("Impossible de se connecter. Veuillez réessayer.");
@@ -24,7 +25,7 @@ const Login: React.FC = () => {
         <div className="flex min-h-screen flex-col items-center justify-center bg-slate-50 dark:bg-background-dark p-4">
              <div className="w-full max-w-md">
                 <div className="mb-8 text-center">
-                    <a className="flex items-center justify-center gap-2 mb-4" href="./index.html" aria-label="Retour à l'accueil">
+                    <a className="flex items-center justify-center gap-2 mb-4" href="#" aria-label="Retour à l'accueil">
                         <svg className="h-10 w-10 text-primary" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
                             <path d="M2 17l10 5 10-5"></path>
