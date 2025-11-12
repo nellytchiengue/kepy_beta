@@ -14,9 +14,25 @@ const Login: React.FC = () => {
         try {
             await signInWithPopup(auth, provider);
             window.location.href = '#'; // Redirect on success to home page
-        } catch (error) {
-            console.error("Authentication error:", error);
-            setError("Impossible de se connecter. Veuillez réessayer.");
+        } catch (err: any) {
+            console.error("Authentication error:", err);
+            let errorMessage = "Impossible de se connecter. Veuillez réessayer.";
+             if (err.code) {
+                switch (err.code) {
+                    case 'auth/popup-blocked':
+                        errorMessage = "La fenêtre de connexion a été bloquée. Veuillez autoriser les pop-ups pour ce site.";
+                        break;
+                    case 'auth/cancelled-popup-request':
+                        errorMessage = "La connexion a été annulée.";
+                        break;
+                    case 'auth/unauthorized-domain':
+                        errorMessage = "Erreur de configuration : ce domaine n'est pas autorisé pour l'authentification.";
+                        break;
+                    default:
+                        errorMessage = `Une erreur est survenue (${err.code}). Veuillez réessayer.`;
+                }
+            }
+            setError(errorMessage);
             setIsLoading(false);
         }
     };

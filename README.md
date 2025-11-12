@@ -70,9 +70,10 @@ Pour ajouter l'authentification via Google, suivez ces étapes :
     *   Cliquez sur `Authorized domains`.
     *   Cliquez sur `Add domain` et ajoutez le domaine sur lequel votre site est hébergé.
         *   Pour cet environnement de développement, ajoutez : `aistudio.google.com`
+        *   Si vous déployez sur Vercel, ajoutez votre domaine Vercel (ex: `kepy-beta.vercel.app`).
         *   Si vous déployez sur GitHub Pages, ajoutez : `VOTRE_NOM.github.io`
         *   `localhost` est généralement autorisé par défaut pour le développement local.
-    *   **NOTE IMPORTANTE** : Si vous voyez une erreur du type "**aistudio.google.com n'autorise pas la connexion**", c'est parce que vous avez oublié cette étape !
+    *   **NOTE IMPORTANTE** : Si vous voyez une erreur du type "**aistudio.google.com n'autorise pas la connexion**" ou que la connexion échoue sans message clair, c'est très probablement parce que vous avez oublié cette étape !
 
 Votre application est maintenant prête à utiliser l'authentification Firebase.
 
