@@ -12,7 +12,7 @@ Ce projet est construit sans aucun outil de build (pas de Webpack, Vite, etc.), 
 *   **Style**: Tailwind CSS (via CDN)
 *   **Interactivité**: React 18 (via CDN UMD) & TypeScript
 *   **Authentification**: Firebase Authentication (Google Sign-In)
-*   **Hébergement**: Conçu pour un déploiement facile sur GitHub Pages ou Vercel.
+*   **Hébergement**: Conçu pour un déploiement facile sur n'importe quel service d'hébergement statique.
 
 ## Configuration Requise
 
@@ -56,35 +56,23 @@ Pour ajouter l'authentification via Google, suivez ces étapes :
     *   Firebase vous fournira un objet de configuration `firebaseConfig`. **Copiez cet objet**.
 
 3.  **Activez l'authentification Google** :
-    *   Dans le menu de gauche, allez dans `Authentication` > onglet `Sign-in method`.
+    *   Dans le menu de gauche, allez dans `Build` > `Authentication`.
+    *   Allez à l'onglet `Sign-in method`.
     *   Cliquez sur "Google" dans la liste des fournisseurs, activez-le, et choisissez une adresse e-mail de support. Enregistrez.
 
 4.  **Configurez les clés dans votre projet** :
     *   Ouvrez le fichier `firebaseConfig.ts` qui se trouve à la racine du projet.
-    *   Remplacez les valeurs de l'objet `firebaseConfig` par celles que vous avez copiées à l'étape 2.
+    *   Remplacez l'objet `firebaseConfig` par défaut par celui que vous avez copié à l'étape 2.
 
-    ```typescript
-    // firebaseConfig.ts
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-
-    // IMPORTANT : Remplacez cet objet par la configuration de VOTRE projet Firebase
-    const firebaseConfig = {
-      apiKey: "VOTRE_API_KEY",
-      authDomain: "VOTRE_AUTH_DOMAIN",
-      projectId: "VOTRE_PROJECT_ID",
-      storageBucket: "VOTRE_STORAGE_BUCKET",
-      messagingSenderId: "VOTRE_MESSAGING_SENDER_ID",
-      appId: "VOTRE_APP_ID"
-    };
-
-    // Initialiser Firebase
-    const app = initializeApp(firebaseConfig);
-    export const auth = getAuth(app);
-    ```
-
-5.  **Domaines autorisés (Important pour le déploiement)** :
-    *   Dans la console Firebase, sous `Authentication` > onglet `Settings` > `Authorized domains`, assurez-vous d'ajouter le domaine sur lequel votre site sera hébergé (par exemple, `votre-nom.github.io` ou le domaine fourni par Vercel). `localhost` est généralement autorisé par défaut pour le développement.
+5.  **Domaines autorisés (ÉTAPE CRUCIALE POUR CORRIGER L'ERREUR DE CONNEXION)** :
+    *   Pour des raisons de sécurité, Firebase n'autorise que les connexions provenant de domaines que vous avez approuvés.
+    *   Dans la console Firebase, allez dans `Build` > `Authentication` > onglet `Settings`.
+    *   Cliquez sur `Authorized domains`.
+    *   Cliquez sur `Add domain` et ajoutez le domaine sur lequel votre site est hébergé.
+        *   Pour cet environnement de développement, ajoutez : `aistudio.google.com`
+        *   Si vous déployez sur GitHub Pages, ajoutez : `VOTRE_NOM.github.io`
+        *   `localhost` est généralement autorisé par défaut pour le développement local.
+    *   **NOTE IMPORTANTE** : Si vous voyez une erreur du type "**aistudio.google.com n'autorise pas la connexion**", c'est parce que vous avez oublié cette étape !
 
 Votre application est maintenant prête à utiliser l'authentification Firebase.
 
@@ -113,7 +101,7 @@ GitHub Pages est idéal pour héberger des sites statiques directement depuis vo
     *   Dans la section `Build and deployment`, sous `Source`, sélectionnez `Deploy from a branch`.
     *   Choisissez la branche `main` et le dossier `/ (root)`.
     *   Cliquez sur `Save`.
-4.  **Attendez quelques minutes** : Votre site sera déployé à une URL comme `https://VOTRE_NOM.github.io/kepy-website/`.
+4.  **Attendez quelques minutes** : Votre site sera déployé à une URL comme `https://VOTRE_NOM.github.io/kepy-website/`. N'oubliez pas d'ajouter ce domaine dans les domaines autorisés de Firebase !
 
 ### Méthode 2 : Déployer avec Vercel (Puissant et flexible)
 
@@ -129,7 +117,7 @@ Vercel offre un déploiement ultra-rapide et des fonctionnalités avancées.
     *   Le `Framework Preset` doit être `Other`.
     *   Les champs `Build Command` et `Output Directory` peuvent être laissés vides.
 5.  **Déployez** : Cliquez sur le bouton `Deploy`.
-6.  **C'est en ligne !** : Vercel vous donnera une URL unique pour votre projet déployé.
+6.  **C'est en ligne !** : Vercel vous donnera une URL unique pour votre projet déployé. N'oubliez pas d'ajouter ce domaine dans les domaines autorisés de Firebase !
 
 ## Personnalisation
 

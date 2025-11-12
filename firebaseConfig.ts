@@ -3,6 +3,18 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 /** 
+// TODO: Remplacez cet objet par la configuration de VOTRE projet Firebase.
+// Vous pouvez trouver cette configuration dans les paramètres de votre projet
+// sur la console Firebase, après avoir ajouté une application web.
+const firebaseConfig = {
+  apiKey: "VOTRE_API_KEY",
+  authDomain: "VOTRE_AUTH_DOMAIN",
+  projectId: "VOTRE_PROJECT_ID",
+  storageBucket: "VOTRE_STORAGE_BUCKET",
+  messagingSenderId: "VOTRE_MESSAGING_SENDER_ID",
+  appId: "VOTRE_APP_ID"
+};
+
 // TODO: Remplacez cet objet par la configuration de VOTRE projet Firebase
 // que vous pouvez trouver dans les paramètres de votre projet sur la console Firebase.
 const firebaseConfig = {
@@ -26,6 +38,8 @@ const firebaseConfig = {
   appId: "1:321528417810:web:87312a40ca1c64656352cb",
   measurementId: "G-VY0P0BNH1P"
 };
+
+
 
 
 // Initialiser Firebase
