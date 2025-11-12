@@ -1,19 +1,37 @@
 
 import React, { useState, useEffect } from 'react';
 import { GOOGLE_FORM_URL_BASE, GOOGLE_FORM_VENDOR_ID_PARAM, LOOKER_VENDOR_BASE_URL } from '../constants';
+import { auth } from '../firebaseConfig';
+import { onAuthStateChanged, User } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 
 const VendorWidget: React.FC = () => {
   const [vendorId, setVendorId] = useState<string>('');
+  const [user, setUser] = useState<User | null>(null);
 
-  // Load vendorId from localStorage on initial render
+  // Handle auth state changes
   useEffect(() => {
-    const savedVendorId = localStorage.getItem('kepyVendorId');
-    if (savedVendorId) {
-      setVendorId(savedVendorId);
-    }
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
   }, []);
 
-  // Handle input change and save to localStorage
+  // Set vendorId based on user status or localStorage
+  useEffect(() => {
+    if (user) {
+      setVendorId(user.email || '');
+      localStorage.removeItem('kepyVendorId'); // Clean up old local ID
+    } else {
+      const savedVendorId = localStorage.getItem('kepyVendorId');
+      if (savedVendorId) {
+        setVendorId(savedVendorId);
+      } else {
+        setVendorId(''); // Ensure it's empty if no user and no saved ID
+      }
+    }
+  }, [user]);
+
+  // Handle input change for non-logged-in users
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newVendorId = event.target.value;
     setVendorId(newVendorId);
@@ -23,9 +41,8 @@ const VendorWidget: React.FC = () => {
   // Construct URLs
   const prefilledFormUrl = `${GOOGLE_FORM_URL_BASE}?usp=pp_url&${GOOGLE_FORM_VENDOR_ID_PARAM}=${encodeURIComponent(vendorId)}`;
   
-  // Looker Studio expects params in a JSON string
   const lookerParams = JSON.stringify({
-    ds0: { // It is common to need a data source ID, assuming ds0 but might need adjustment
+    ds0: {
       vendorId: vendorId
     }
   });
@@ -35,19 +52,26 @@ const VendorWidget: React.FC = () => {
 
   return (
     <div className="w-full max-w-xs flex flex-col items-center gap-4">
-      <div className="w-full">
-        <label htmlFor="vendorId" className="sr-only">Votre identifiant vendeur</label>
-        <input
-          id="vendorId"
-          type="text"
-          value={vendorId}
-          onChange={handleInputChange}
-          placeholder="Votre identifiant vendeur"
-          className="w-full px-4 py-2 border border-border-light rounded-lg bg-background-light dark:bg-slate-700 dark:border-border-dark focus:ring-2 focus:ring-primary focus:border-transparent transition"
-          aria-describedby="vendorId-help"
-        />
-        <p id="vendorId-help" className="text-xs text-slate-500 mt-1">Cet identifiant est sauvegardé sur votre appareil.</p>
-      </div>
+      {user ? (
+        <div className="w-full text-center p-3 bg-primary/10 rounded-lg border border-primary/20">
+          <p className="text-sm font-medium text-slate-600 dark:text-slate-300">Connecté en tant que :</p>
+          <p className="text-base font-semibold text-text-light dark:text-text-dark truncate" title={user.email || ''}>{user.email}</p>
+        </div>
+      ) : (
+        <div className="w-full">
+          <label htmlFor="vendorId" className="sr-only">Votre identifiant vendeur</label>
+          <input
+            id="vendorId"
+            type="text"
+            value={vendorId}
+            onChange={handleInputChange}
+            placeholder="Votre identifiant vendeur"
+            className="w-full px-4 py-2 border border-border-light rounded-lg bg-background-light dark:bg-slate-700 dark:border-border-dark focus:ring-2 focus:ring-primary focus:border-transparent transition"
+            aria-describedby="vendorId-help"
+          />
+          <p id="vendorId-help" className="text-xs text-slate-500 mt-1">Cet identifiant est sauvegardé sur votre appareil.</p>
+        </div>
+      )}
 
       <a
         href={!isVendorIdEmpty ? prefilledFormUrl : '#'}

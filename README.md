@@ -2,7 +2,7 @@
 
 ## À propos du projet
 
-KEPY est une application web - version MVP (Minimum Viable Product) - pour le suivi des ventes. Elle est conçue pour être simple, moderne et responsive. Elle permet aux vendeurs de saisir facilement leurs ventes et de consulter leurs performances, tandis que les managers bénéficient d'une vue d'ensemble consolidée.
+KEPY est une application web MVP (Minimum Viable Product) pour le suivi des ventes. Elle est conçue pour être simple, moderne et responsive. Elle permet aux vendeurs de saisir facilement leurs ventes et de consulter leurs performances, tandis que les managers bénéficient d'une vue d'ensemble consolidée.
 
 Ce projet est construit sans aucun outil de build (pas de Webpack, Vite, etc.), en utilisant du HTML, Tailwind CSS (via CDN), et React (via CDN) pour une simplicité maximale de déploiement.
 
@@ -11,11 +11,12 @@ Ce projet est construit sans aucun outil de build (pas de Webpack, Vite, etc.), 
 *   **Structure**: HTML5
 *   **Style**: Tailwind CSS (via CDN)
 *   **Interactivité**: React 18 (via CDN UMD) & TypeScript
+*   **Authentification**: Firebase Authentication (Google Sign-In)
 *   **Hébergement**: Conçu pour un déploiement facile sur GitHub Pages ou Vercel.
 
 ## Configuration Requise
 
-Avant de déployer, vous devez remplacer les valeurs par défaut dans le fichier `constants.ts` par vos propres URLs.
+Avant de déployer, vous devez remplacer les valeurs par défaut dans les fichiers de configuration par vos propres URLs et clés.
 
 ### 1. Google Form (Saisie des ventes)
 
@@ -40,6 +41,52 @@ Avant de déployer, vous devez remplacer les valeurs par défaut dans le fichier
 
 *   **`DEMO_CONTACT_FORM_URL`**: L'URL de votre formulaire de contact (ex: un autre Google Form).
 *   **`GOOGLE_SHEET_URL`**: Le lien de partage de votre Google Sheet consolidé. Utilisez le lien `/preview` pour une meilleure compatibilité.
+
+### 4. Intégration de Firebase (Authentification)
+
+Pour ajouter l'authentification via Google, suivez ces étapes :
+
+1.  **Créez un projet Firebase** :
+    *   Allez sur la [console Firebase](https://console.firebase.google.com/).
+    *   Cliquez sur "Ajouter un projet" et suivez les instructions.
+
+2.  **Ajoutez une application web à votre projet** :
+    *   Dans le tableau de bord de votre projet, cliquez sur l'icône web (`</>`) pour ajouter une application web.
+    *   Donnez un nom à votre application (ex: "KEPY Web") et cliquez sur "Enregistrer l'application".
+    *   Firebase vous fournira un objet de configuration `firebaseConfig`. **Copiez cet objet**.
+
+3.  **Activez l'authentification Google** :
+    *   Dans le menu de gauche, allez dans `Authentication` > onglet `Sign-in method`.
+    *   Cliquez sur "Google" dans la liste des fournisseurs, activez-le, et choisissez une adresse e-mail de support. Enregistrez.
+
+4.  **Configurez les clés dans votre projet** :
+    *   Ouvrez le fichier `firebaseConfig.ts` qui se trouve à la racine du projet.
+    *   Remplacez les valeurs de l'objet `firebaseConfig` par celles que vous avez copiées à l'étape 2.
+
+    ```typescript
+    // firebaseConfig.ts
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    // IMPORTANT : Remplacez cet objet par la configuration de VOTRE projet Firebase
+    const firebaseConfig = {
+      apiKey: "VOTRE_API_KEY",
+      authDomain: "VOTRE_AUTH_DOMAIN",
+      projectId: "VOTRE_PROJECT_ID",
+      storageBucket: "VOTRE_STORAGE_BUCKET",
+      messagingSenderId: "VOTRE_MESSAGING_SENDER_ID",
+      appId: "VOTRE_APP_ID"
+    };
+
+    // Initialiser Firebase
+    const app = initializeApp(firebaseConfig);
+    export const auth = getAuth(app);
+    ```
+
+5.  **Domaines autorisés (Important pour le déploiement)** :
+    *   Dans la console Firebase, sous `Authentication` > onglet `Settings` > `Authorized domains`, assurez-vous d'ajouter le domaine sur lequel votre site sera hébergé (par exemple, `votre-nom.github.io` ou le domaine fourni par Vercel). `localhost` est généralement autorisé par défaut pour le développement.
+
+Votre application est maintenant prête à utiliser l'authentification Firebase.
 
 ---
 
