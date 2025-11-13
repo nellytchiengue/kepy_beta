@@ -1,22 +1,25 @@
 
 import React from 'react';
+import { useTranslation } from '../context/I18nContext';
 
 const HowItWorks: React.FC = () => {
+  const { t } = useTranslation();
+
   const steps = [
     {
       icon: 'phone_iphone',
-      title: '1. Saisissez une vente',
-      description: 'Saisissez une vente depuis votre téléphone.',
+      title: t('howitworks.step1_title'),
+      description: t('howitworks.step1_desc'),
     },
     {
       icon: 'cloud_sync',
-      title: '2. Consolidation auto',
-      description: 'Vos données se consolident automatiquement dans Google Sheets.',
+      title: t('howitworks.step2_title'),
+      description: t('howitworks.step2_desc'),
     },
     {
       icon: 'monitoring',
-      title: '3. Visualisez vos résultats',
-      description: 'Visualisez vos résultats dans un tableau de bord clair (Looker).',
+      title: t('howitworks.step3_title'),
+      description: t('howitworks.step3_desc'),
     },
   ];
 
@@ -25,10 +28,10 @@ const HowItWorks: React.FC = () => {
       <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <h2 className="text-3xl font-bold font-display tracking-tight text-text-light dark:text-text-dark sm:text-4xl">
-            Comment KEPY fonctionne ?
+            {t('howitworks.section_title')}
           </h2>
           <p className="mt-4 text-lg text-slate-600 dark:text-slate-300">
-            Suivez vos ventes en 3 étapes simples.
+            {t('howitworks.section_subtitle')}
           </p>
         </div>
         <div className="mt-12 grid gap-8 md:grid-cols-3 md:gap-12">

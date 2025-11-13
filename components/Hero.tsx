@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { LOOKER_CONSOLIDATED_URL, GOOGLE_FORM_URL_BASE, DEMO_CONTACT_FORM_URL } from '../constants';
+import { useTranslation } from '../context/I18nContext';
 
 const AnimatedBackground = () => (
   <div aria-hidden="true" className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -11,6 +12,7 @@ const AnimatedBackground = () => (
 
 
 const Hero: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section className="relative w-full overflow-hidden bg-slate-900 py-20 md:py-28 lg:py-36">
       <AnimatedBackground />
@@ -18,10 +20,10 @@ const Hero: React.FC = () => {
         <div className="flex flex-col items-center space-y-8 text-center">
           <div className="max-w-3xl space-y-4">
             <h1 className="text-4xl font-bold font-display tracking-tighter text-white sm:text-5xl md:text-6xl lg:text-7xl">
-              Suivi des ventes simple et instantané.
+              {t('hero.title')}
             </h1>
             <p className="mx-auto max-w-[700px] text-lg text-slate-300 md:text-xl">
-              Saisissez, consolidez et visualisez vos ventes en temps réel avec KEPY (MVP).
+              {t('hero.subtitle')}
             </p>
           </div>
           <div className="flex w-full max-w-sm flex-col items-center gap-4 sm:max-w-md">
@@ -32,7 +34,7 @@ const Hero: React.FC = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
               >
-                Saisir une vente
+                {t('hero.cta_enter_sale')}
               </a>
               <a 
                 className="inline-flex h-12 w-full items-center justify-center rounded-xl border border-slate-700 bg-transparent px-8 text-base font-medium text-white shadow-sm transition-colors hover:bg-slate-800/50 dark:border-border-dark dark:text-text-dark dark:hover:bg-slate-800 md:w-auto" 
@@ -40,7 +42,7 @@ const Hero: React.FC = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
               >
-                Ouvrir le tableau de bord
+                {t('hero.cta_open_dashboard')}
               </a>
             </div>
             <a 
@@ -49,7 +51,7 @@ const Hero: React.FC = () => {
               target="_blank" 
               rel="noopener noreferrer"
             >
-              Demander une démo
+              {t('hero.cta_request_demo')}
             </a>
           </div>
         </div>

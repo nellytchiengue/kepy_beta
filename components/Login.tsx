@@ -2,10 +2,12 @@
 import React, { useState } from 'react';
 import { auth } from '../firebaseConfig';
 import { GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { useTranslation } from '../context/I18nContext';
 
 const Login: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
+    const { t } = useTranslation();
 
     const handleGoogleSignIn = async () => {
         setIsLoading(true);
@@ -16,21 +18,11 @@ const Login: React.FC = () => {
             window.location.href = '#'; // Redirect on success to home page
         } catch (err: any) {
             console.error("Authentication error:", err);
-            let errorMessage = "Impossible de se connecter. Veuillez réessayer.";
+            let errorMessage = t('login.error_generic');
              if (err.code) {
-                switch (err.code) {
-                    case 'auth/popup-blocked':
-                        errorMessage = "La fenêtre de connexion a été bloquée. Veuillez autoriser les pop-ups pour ce site.";
-                        break;
-                    case 'auth/cancelled-popup-request':
-                        errorMessage = "La connexion a été annulée.";
-                        break;
-                    case 'auth/unauthorized-domain':
-                        errorMessage = "Erreur de configuration : ce domaine n'est pas autorisé pour l'authentification.";
-                        break;
-                    default:
-                        errorMessage = `Une erreur est survenue (${err.code}). Veuillez réessayer.`;
-                }
+                const errorCodeKey = `login.error_${err.code.replace('auth/', '').replace(/-/g, '_')}`;
+                // Fallback to generic error if specific one doesn't exist
+                errorMessage = t(errorCodeKey, { defaultValue: t('login.error_with_code', { code: err.code }) });
             }
             setError(errorMessage);
             setIsLoading(false);
@@ -41,7 +33,7 @@ const Login: React.FC = () => {
         <div className="flex min-h-screen flex-col items-center justify-center bg-slate-50 dark:bg-background-dark p-4">
              <div className="w-full max-w-md">
                 <div className="mb-8 text-center">
-                    <a className="flex items-center justify-center gap-2 mb-4" href="#" aria-label="Retour à l'accueil">
+                    <a className="flex items-center justify-center gap-2 mb-4" href="#" aria-label={t('login.back_to_home_label')}>
                         <svg className="h-10 w-10 text-primary" fill="none" height="24" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
                             <path d="M2 17l10 5 10-5"></path>
@@ -49,7 +41,7 @@ const Login: React.FC = () => {
                         </svg>
                         <span className="text-4xl font-bold font-display text-text-light dark:text-text-dark">KEPY</span>
                     </a>
-                    <p className="text-slate-600 dark:text-slate-300">Connectez-vous pour accéder à votre espace.</p>
+                    <p className="text-slate-600 dark:text-slate-300">{t('login.subtitle')}</p>
                 </div>
                 
                 <div className="rounded-xl border border-border-light bg-card-light p-8 shadow-lg dark:border-border-dark dark:bg-card-dark">
@@ -65,13 +57,13 @@ const Login: React.FC = () => {
                            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
                            <path fill="none" d="M0 0h48v48H0z"></path>
                         </svg>
-                        <span>Continuer avec Google</span>
+                        <span>{t('login.continue_with_google')}</span>
                     </button>
                     {error && <p className="mt-4 text-center text-sm text-red-500">{error}</p>}
                 </div>
 
                 <p className="mt-8 text-center text-sm text-slate-500">
-                    En continuant, vous acceptez nos <a href="#" className="underline hover:text-primary">Conditions d'utilisation</a>.
+                    {t('login.terms_prefix')} <a href="#" className="underline hover:text-primary">{t('login.terms_link')}</a>.
                 </p>
              </div>
         </div>

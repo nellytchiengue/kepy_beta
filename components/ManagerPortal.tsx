@@ -1,29 +1,31 @@
 
 import React from 'react';
 import { LOOKER_CONSOLIDATED_URL, GOOGLE_SHEET_URL } from '../constants';
+import { useTranslation } from '../context/I18nContext';
 
 const ManagerPortal: React.FC = () => {
+    const { t } = useTranslation();
 
     const statCards = [
-        { title: "Today's Revenue", value: "$12,480", change: "+5.2%", changeColor: 'text-primary' },
-        { title: "Team Performance", value: "85%", change: "-1.5%", changeColor: 'text-red-500' },
-        { title: "Pending Tasks", value: "3", change: "+1", changeColor: 'text-primary' },
+        { title: t('manager.stat_revenue'), value: "$12,480", change: "+5.2%", changeColor: 'text-primary' },
+        { title: t('manager.stat_performance'), value: "85%", change: "-1.5%", changeColor: 'text-red-500' },
+        { title: t('manager.stat_tasks'), value: "3", change: "+1", changeColor: 'text-primary' },
     ];
 
     const quickActions = [
-        { icon: 'bar_chart', title: 'View Team Performance', description: 'Detailed team analytics', href: LOOKER_CONSOLIDATED_URL },
-        { icon: 'groups', title: 'Manage Sales Reps', description: 'Add or edit team members', href: '#' },
-        { icon: 'analytics', title: 'Review Sales Reports', description: 'Access reporting section', href: GOOGLE_SHEET_URL },
-        { icon: 'target', title: 'Set Team Goals', description: 'Define sales targets', href: '#' },
-        { icon: 'approval', title: 'Approve Commissions', description: 'Link to approvals workflow', href: '#' },
-        { icon: 'campaign', title: 'Send Announcements', description: 'Team-wide communication', href: '#' },
+        { icon: 'bar_chart', title: t('manager.qa_perf_title'), description: t('manager.qa_perf_desc'), href: LOOKER_CONSOLIDATED_URL },
+        { icon: 'groups', title: t('manager.qa_reps_title'), description: t('manager.qa_reps_desc'), href: '#' },
+        { icon: 'analytics', title: t('manager.qa_reports_title'), description: t('manager.qa_reports_desc'), href: GOOGLE_SHEET_URL },
+        { icon: 'target', title: t('manager.qa_goals_title'), description: t('manager.qa_goals_desc'), href: '#' },
+        { icon: 'approval', title: t('manager.qa_commissions_title'), description: t('manager.qa_commissions_desc'), href: '#' },
+        { icon: 'campaign', title: t('manager.qa_announce_title'), description: t('manager.qa_announce_desc'), href: '#' },
     ];
     
     const navItems = [
-        { icon: 'dashboard', label: 'Dashboard', active: true },
-        { icon: 'badge', label: 'Team', active: false },
-        { icon: 'summarize', label: 'Reports', active: false },
-        { icon: 'settings', label: 'Settings', active: false },
+        { icon: 'dashboard', label: t('manager.nav_dashboard'), active: true },
+        { icon: 'badge', label: t('manager.nav_team'), active: false },
+        { icon: 'summarize', label: t('manager.nav_reports'), active: false },
+        { icon: 'settings', label: t('manager.nav_settings'), active: false },
     ];
 
     return (
@@ -51,21 +53,21 @@ const ManagerPortal: React.FC = () => {
             {/* Main Content */}
             <div className="flex-1 pb-24 lg:pb-0">
                 <header className="sticky top-0 z-20 flex items-center justify-between border-b border-border-light bg-background-light/80 p-4 backdrop-blur-sm dark:border-border-dark dark:bg-background-dark/80">
-                    <h1 className="text-lg font-bold font-display tracking-tight lg:hidden">Manager Portal</h1>
+                    <h1 className="text-lg font-bold font-display tracking-tight lg:hidden">{t('manager.portal_title')}</h1>
                      <div className="hidden flex-1 lg:block">
-                        <h2 className="text-3xl font-bold font-display tracking-tight text-text-light dark:text-text-dark">Good morning, Alex!</h2>
+                        <h2 className="text-3xl font-bold font-display tracking-tight text-text-light dark:text-text-dark">{t('manager.greeting', {name: 'Alex'})}</h2>
                     </div>
                     <div className="flex items-center gap-4">
                         <button className="hidden items-center justify-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white shadow-sm transition-colors hover:bg-primary/90 lg:flex">
                             <span className="material-symbols-outlined text-xl">add</span>
-                            <span>New Action</span>
+                            <span>{t('manager.new_action')}</span>
                         </button>
-                        <img className="size-10 rounded-full" alt="Manager's profile picture." src="https://i.pravatar.cc/40?u=alexmanager" />
+                        <img className="size-10 rounded-full" alt={t('manager.profile_pic_alt')} src="https://i.pravatar.cc/40?u=alexmanager" />
                     </div>
                 </header>
 
                 <main className="flex-grow p-4 lg:p-6 xl:p-8">
-                    <h2 className="text-3xl font-bold font-display tracking-tight text-text-light dark:text-text-dark lg:hidden mb-6">Good morning, Alex!</h2>
+                    <h2 className="text-3xl font-bold font-display tracking-tight text-text-light dark:text-text-dark lg:hidden mb-6">{t('manager.greeting', {name: 'Alex'})}</h2>
                     
                     {/* Stat Cards */}
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -79,7 +81,7 @@ const ManagerPortal: React.FC = () => {
                     </div>
 
                     {/* Quick Actions */}
-                    <h3 className="pt-8 pb-4 text-2xl font-bold font-display text-text-light dark:text-text-dark">Quick Actions</h3>
+                    <h3 className="pt-8 pb-4 text-2xl font-bold font-display text-text-light dark:text-text-dark">{t('manager.quick_actions_title')}</h3>
                     <div className="grid grid-cols-[repeat(auto-fit,minmax(160px,1fr))] gap-4">
                        {quickActions.map(action => (
                             <a href={action.href} key={action.title} target={action.href.startsWith('http') ? '_blank' : '_self'} rel="noopener noreferrer" className="flex h-40 flex-col justify-between gap-3 rounded-xl border border-border-light bg-card-light p-4 transition-all hover:border-primary/50 hover:shadow-lg dark:border-border-dark dark:bg-card-dark dark:hover:border-primary/50">

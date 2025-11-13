@@ -10,12 +10,14 @@ import Faq from './components/Faq';
 import Footer from './components/Footer';
 import Login from './components/Login';
 import ManagerPortal from './components/ManagerPortal';
+import { useTranslation } from './context/I18nContext';
 
 const LandingPage: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <>
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-black">
-        Aller au contenu
+        {t('skip_to_content')}
       </a>
       <Header />
       <main id="main-content" className="flex-1">
@@ -33,6 +35,7 @@ const LandingPage: React.FC = () => {
 
 const App: React.FC = () => {
   const [route, setRoute] = useState(window.location.hash);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -53,6 +56,24 @@ const App: React.FC = () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
+
+  // Update document title and meta description based on language and route
+  useEffect(() => {
+    const descriptionElement = document.querySelector('meta[name="description"]');
+    switch (route) {
+      case '#login':
+        document.title = t('login.meta_title');
+        if (descriptionElement) descriptionElement.setAttribute('content', t('login.meta_description'));
+        break;
+      case '#manager':
+         document.title = t('manager.meta_title');
+        if (descriptionElement) descriptionElement.setAttribute('content', t('manager.meta_description'));
+        break;
+      default:
+        document.title = t('home.meta_title');
+        if (descriptionElement) descriptionElement.setAttribute('content', t('home.meta_description'));
+    }
+  }, [route, t]);
 
   const renderPage = () => {
     switch (route) {
