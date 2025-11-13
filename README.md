@@ -44,7 +44,7 @@ Avant de déployer, vous devez remplacer les valeurs par défaut dans les fichie
 
 ### 4. Intégration de Firebase (Authentification)
 
-Pour ajouter l'authentification via Google, suivez ces étapes :
+Pour que la connexion Google fonctionne, une configuration précise dans la console Firebase est indispensable. La nouvelle interface de la console a changé, suivez bien ces étapes.
 
 1.  **Créez un projet Firebase** :
     *   Allez sur la [console Firebase](https://console.firebase.google.com/).
@@ -55,25 +55,26 @@ Pour ajouter l'authentification via Google, suivez ces étapes :
     *   Donnez un nom à votre application (ex: "KEPY Web") et cliquez sur "Enregistrer l'application".
     *   Firebase vous fournira un objet de configuration `firebaseConfig`. **Copiez cet objet**.
 
-3.  **Activez l'authentification Google** :
-    *   Dans le menu de gauche, allez dans `Build` > `Authentication`.
-    *   Allez à l'onglet `Sign-in method`.
-    *   Cliquez sur "Google" dans la liste des fournisseurs, activez-le, et choisissez une adresse e-mail de support. Enregistrez.
-
-4.  **Configurez les clés dans votre projet** :
-    *   Ouvrez le fichier `firebaseConfig.ts` qui se trouve à la racine du projet.
+3.  **Configurez les clés dans votre projet** :
+    *   Ouvrez le fichier `firebaseConfig.ts`.
     *   Remplacez l'objet `firebaseConfig` par défaut par celui que vous avez copié à l'étape 2.
 
-5.  **Domaines autorisés (ÉTAPE CRUCIALE POUR CORRIGER L'ERREUR DE CONNEXION)** :
-    *   Pour des raisons de sécurité, Firebase n'autorise que les connexions provenant de domaines que vous avez approuvés.
-    *   Dans la console Firebase, allez dans `Build` > `Authentication` > onglet `Settings`.
-    *   Cliquez sur `Authorized domains`.
-    *   Cliquez sur `Add domain` et ajoutez le domaine sur lequel votre site est hébergé.
-        *   Pour cet environnement de développement, ajoutez : `aistudio.google.com`
-        *   Si vous déployez sur Vercel, ajoutez votre domaine Vercel (ex: `kepy-beta.vercel.app`).
-        *   Si vous déployez sur GitHub Pages, ajoutez : `VOTRE_NOM.github.io`
-        *   `localhost` est généralement autorisé par défaut pour le développement local.
-    *   **NOTE IMPORTANTE** : Si vous voyez une erreur du type "**aistudio.google.com n'autorise pas la connexion**" ou que la connexion échoue sans message clair, c'est très probablement parce que vous avez oublié cette étape !
+4.  **Activez la méthode de connexion Google (CRUCIAL - Étape 1/2)** :
+    *   Cette étape corrige l'erreur `auth/operation-not-allowed`.
+    *   Dans la console Firebase, allez dans le menu de gauche et cliquez sur **Créer** > **Authentication**.
+    *   Allez dans l'onglet **Méthodes de connexion**.
+    *   Cliquez sur **Google** dans la liste des fournisseurs, activez-le, choisissez une adresse e-mail de support, puis **Enregistrez**.
+
+5.  **Autorisez vos domaines de déploiement (CRUCIAL - Étape 2/2)** :
+    *   Cette étape corrige les erreurs comme `auth/unauthorized-domain` ou lorsque la fenêtre de connexion se ferme sans succès.
+    *   Dans la section **Authentication**, allez dans l'onglet **Paramètres**.
+    *   Descendez jusqu'à la section **Domaines autorisés** et cliquez sur **Ajouter un domaine**.
+    *   Ajoutez les domaines où votre application sera accessible :
+        *   Pour cet environnement de développement : `aistudio.google.com`
+        *   Pour votre déploiement Vercel : `kepy-beta.vercel.app` (ou votre URL Vercel)
+        *   Pour GitHub Pages : `VOTRE_NOM.github.io`
+        *   Pour un domaine personnalisé : `votre-domaine.com`
+    *   **NOTE IMPORTANTE** : Si la connexion échoue, la cause est presque toujours une mauvaise configuration à l'une de ces deux dernières étapes.
 
 Votre application est maintenant prête à utiliser l'authentification Firebase.
 
