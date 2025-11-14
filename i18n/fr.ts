@@ -20,7 +20,7 @@ export const fr = {
   },
   hero: {
     title: 'Suivi des ventes simple et instantané.',
-    subtitle: 'Saisissez, consolidez et visualisez vos ventes en temps réel avec KEPY (MVP).',
+    subtitle: 'Saisissez, consolidez et visualisez vos ventes en temps réel avec KEPY.',
     cta_enter_sale: 'Saisir une vente',
     cta_open_dashboard: 'Ouvrir le tableau de bord',
     cta_request_demo: 'Demander une démo',

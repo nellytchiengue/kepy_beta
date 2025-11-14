@@ -30,16 +30,14 @@ const firebaseConfig = {
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyDk5JcZNMWCZNB61BERASQSzATuOtxKoTU",
-  authDomain: "kepy-beta.firebaseapp.com",
-  projectId: "kepy-beta",
-  storageBucket: "kepy-beta.firebasestorage.app",
-  messagingSenderId: "321528417810",
-  appId: "1:321528417810:web:87312a40ca1c64656352cb",
-  measurementId: "G-VY0P0BNH1P"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
-
-
 
 
 // Initialiser Firebase
