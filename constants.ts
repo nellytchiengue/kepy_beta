@@ -26,7 +26,7 @@ export const LOOKER_VENDOR_BASE_URL = 'https://lookerstudio.google.com/reporting
 export const DEMO_CONTACT_FORM_URL = 'https://forms.gle/r4N9DJeLQMUyumU4A';
 
 // 4. Contact Email
-export const CONTACT_EMAIL = 'contact@kepy.com';
+export const CONTACT_EMAIL = 'contact@tmpn.app';
 
 // 5. Manager App URL
 // This now points to the manager route in the SPA.
